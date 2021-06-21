@@ -713,11 +713,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8ff2b45d41bab4646b8e2085eb297ee5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sounds:
-  - {fileID: 8300000, guid: 971fe4730a6ceef45ae451bcdd5e19b7, type: 3}
-  - {fileID: 8300000, guid: 70e1b46180ae5e04f9a22ab0b255d377, type: 3}
-  - {fileID: 8300000, guid: d1f3448cf6532f4449bf916970dddf5f, type: 3}
-  - {fileID: 8300000, guid: 25a6fd16ae076fc41bf357a56db0c333, type: 3}
   speed: 0
   maxSpeed: 100
   minspeed: 10
@@ -726,10 +721,10 @@ MonoBehaviour:
   alt: {fileID: 1552998022}
   planeSpeed: {fileID: 459693932}
   sp: {fileID: 1208580012}
-  startSound: {fileID: 1400701667}
-  runSound: {fileID: 2036909592}
-  stopSound: {fileID: 1916302545}
-  diveSound: {fileID: 1713839933}
+  start: {fileID: 1400701667}
+  run: {fileID: 2036909592}
+  stop: {fileID: 1916302545}
+  dive: {fileID: 1713839933}
 --- !u!1 &582797814
 GameObject:
   m_ObjectHideFlags: 0

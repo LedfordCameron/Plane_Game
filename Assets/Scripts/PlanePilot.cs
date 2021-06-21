@@ -31,6 +31,7 @@ public class PlanePilot : MonoBehaviour
 
         controls.Gameplay.Wheels.performed += ctx => SetWheel();
         controls.Gameplay.StartEngine.performed += ctx => EngineRunning();
+        controls.Gameplay.Reset.performed += ctx => ResetToSP();
 
         //bool initializations
         wheelsdown = true;
@@ -90,6 +91,11 @@ public class PlanePilot : MonoBehaviour
         coroutine = WaitAndPlay(8.0f);
         StartCoroutine(coroutine);  
         Debug.Log("engine running:");
+    }
+
+    void ResetToSP(){
+        this.transform.position = sp.transform.position;
+        this.transform.rotation = sp.transform.rotation;
     }
     void OnEnable(){
         controls.Gameplay.Enable();

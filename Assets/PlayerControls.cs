@@ -41,6 +41,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reset"",
+                    ""type"": ""Button"",
+                    ""id"": ""08ddcfe7-5fb7-40b6-9a9a-4ebf25fb43ea"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -76,6 +84,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""StartEngine"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b4f20f02-6f87-42ff-8fa0-08be6ee808b8"",
+                    ""path"": ""<XInputController>/start"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reset"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -87,6 +106,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_Gameplay_Move = m_Gameplay.FindAction("Move", throwIfNotFound: true);
         m_Gameplay_Wheels = m_Gameplay.FindAction("Wheels", throwIfNotFound: true);
         m_Gameplay_StartEngine = m_Gameplay.FindAction("StartEngine", throwIfNotFound: true);
+        m_Gameplay_Reset = m_Gameplay.FindAction("Reset", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -139,6 +159,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_Gameplay_Move;
     private readonly InputAction m_Gameplay_Wheels;
     private readonly InputAction m_Gameplay_StartEngine;
+    private readonly InputAction m_Gameplay_Reset;
     public struct GameplayActions
     {
         private @PlayerControls m_Wrapper;
@@ -146,6 +167,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Move => m_Wrapper.m_Gameplay_Move;
         public InputAction @Wheels => m_Wrapper.m_Gameplay_Wheels;
         public InputAction @StartEngine => m_Wrapper.m_Gameplay_StartEngine;
+        public InputAction @Reset => m_Wrapper.m_Gameplay_Reset;
         public InputActionMap Get() { return m_Wrapper.m_Gameplay; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -164,6 +186,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @StartEngine.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStartEngine;
                 @StartEngine.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStartEngine;
                 @StartEngine.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnStartEngine;
+                @Reset.started -= m_Wrapper.m_GameplayActionsCallbackInterface.OnReset;
+                @Reset.performed -= m_Wrapper.m_GameplayActionsCallbackInterface.OnReset;
+                @Reset.canceled -= m_Wrapper.m_GameplayActionsCallbackInterface.OnReset;
             }
             m_Wrapper.m_GameplayActionsCallbackInterface = instance;
             if (instance != null)
@@ -177,6 +202,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @StartEngine.started += instance.OnStartEngine;
                 @StartEngine.performed += instance.OnStartEngine;
                 @StartEngine.canceled += instance.OnStartEngine;
+                @Reset.started += instance.OnReset;
+                @Reset.performed += instance.OnReset;
+                @Reset.canceled += instance.OnReset;
             }
         }
     }
@@ -186,5 +214,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMove(InputAction.CallbackContext context);
         void OnWheels(InputAction.CallbackContext context);
         void OnStartEngine(InputAction.CallbackContext context);
+        void OnReset(InputAction.CallbackContext context);
     }
 }
